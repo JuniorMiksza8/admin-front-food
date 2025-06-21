@@ -170,6 +170,53 @@ export const NotificationButton = styled.button<{ hasNotifications?: boolean }>`
 
 export const ProfileDropdown = styled.div`
   position: relative;
+  
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: var(--space-2);
+    min-width: 200px;
+    z-index: var(--z-dropdown);
+    margin-top: var(--space-2);
+    backdrop-filter: blur(20px);
+  }
+  
+  .dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    
+    &:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
+    
+    &.logout {
+      color: var(--color-error);
+      
+      &:hover {
+        background: var(--color-error-light);
+        color: var(--color-error);
+      }
+    }
+  }
+  
+  .dropdown-divider {
+    height: 1px;
+    background: var(--border-color);
+    margin: var(--space-2) 0;
+  }
 `;
 
 export const ProfileButton = styled.button`

@@ -1,33 +1,27 @@
-import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useNavigation } from '../../context/NavigationContext';
 import {
+  ChevronLeft,
+  ChevronRight,
   LayoutDashboard,
-  BarChart3,
-  Users,
   Package,
   ShoppingCart,
-  Warehouse,
-  FileText,
-  Settings,
-  ChevronLeft,
-  ChevronRight
+  Users
 } from 'lucide-react';
 import {
-  SidebarContainer,
-  Logo,
   CollapseButton,
-  Navigation,
-  NavSection,
-  SectionTitle,
+  Logo,
   NavItem,
-  UserProfile
+  NavSection,
+  Navigation,
+  SectionTitle,
+  SidebarContainer
 } from './styles';
+import React, { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Sidebar: React.FC = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const location = useLocation();
-  const { navigateToPage } = useNavigation();
+  const navigate = useNavigate();
 
   const navigationItems = [
     {
@@ -38,36 +32,21 @@ const Sidebar: React.FC = () => {
           path: '/home',
           label: 'Painel de Controle', 
           icon: LayoutDashboard, 
-          badge: null,
-          title: 'Painel de Controle',
-          breadcrumb: ['Início', 'Painel de Controle']
-        },
-        { 
-          id: 'analytics', 
-          path: '/analytics',
-          label: 'Análises', 
-          icon: BarChart3, 
-          badge: null,
-          title: 'Análises',
-          breadcrumb: ['Início', 'Análises']
+          badge: null
         },
         { 
           id: 'usuarios', 
           path: '/usuarios',
           label: 'Usuários', 
           icon: Users, 
-          badge: '12',
-          title: 'Gerenciar Usuários',
-          breadcrumb: ['Início', 'Usuários']
+          badge: '12'
         },
         { 
           id: 'produtos', 
           path: '/produtos',
           label: 'Produtos', 
           icon: Package, 
-          badge: null,
-          title: 'Gerenciar Produtos',
-          breadcrumb: ['Início', 'Produtos']
+          badge: null
         },
       ]
     },
@@ -79,43 +58,14 @@ const Sidebar: React.FC = () => {
           path: '/pedidos',
           label: 'Pedidos', 
           icon: ShoppingCart, 
-          badge: '3',
-          title: 'Gerenciar Pedidos',
-          breadcrumb: ['Início', 'Gestão', 'Pedidos']
-        },
-        { 
-          id: 'estoque', 
-          path: '/estoque',
-          label: 'Estoque', 
-          icon: Warehouse, 
-          badge: null,
-          title: 'Controle de Estoque',
-          breadcrumb: ['Início', 'Gestão', 'Estoque']
-        },
-        { 
-          id: 'relatorios', 
-          path: '/relatorios',
-          label: 'Relatórios', 
-          icon: FileText, 
-          badge: null,
-          title: 'Relatórios',
-          breadcrumb: ['Início', 'Gestão', 'Relatórios']
-        },
-        { 
-          id: 'configuracoes', 
-          path: '/configuracoes',
-          label: 'Configurações', 
-          icon: Settings, 
-          badge: null,
-          title: 'Configurações do Sistema',
-          breadcrumb: ['Início', 'Configurações']
-        },
-      ]
+          badge: '3'
+        }
+        ]
     }
   ];
 
-  const handleNavigation = (item: any) => {
-    navigateToPage(item.path, item.title, item.breadcrumb);
+  const handleNavigation = (path: string) => {
+    navigate(path);
   };
 
   return (
@@ -144,7 +94,7 @@ const Sidebar: React.FC = () => {
                   key={item.id}
                   isActive={location.pathname === item.path}
                   isCollapsed={isCollapsed}
-                  onClick={() => handleNavigation(item)}
+                  onClick={() => handleNavigation(item.path)}
                 >
                   <div className="nav-icon">
                     <IconComponent />
@@ -158,16 +108,6 @@ const Sidebar: React.FC = () => {
         ))}
       </Navigation>
 
-      <UserProfile isCollapsed={isCollapsed}>
-        <div className="avatar">JS</div>
-        <div className="user-info">
-          <div className="user-name">João Silva</div>
-          <div className="user-role">Administrador</div>
-        </div>
-        <div className="user-status">
-          <div className="status-dot"></div>
-        </div>
-      </UserProfile>
     </SidebarContainer>
   );
 };
