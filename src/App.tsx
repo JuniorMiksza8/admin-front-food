@@ -25,7 +25,7 @@ function App() {
           {user && <Sidebar />}
           <ContentArea>
             {user && <Header />}
-            <MainContent>
+            <MainContent padding={user ? '20px' : '0px'}>
               <Routes>
                 {user &&
                   pages.map(page => (

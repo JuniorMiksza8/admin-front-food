@@ -6,11 +6,12 @@ const AppContainer = styled.div`
   background-color: #f5f5f5;
 `
 
-const MainContent = styled.div`
+const MainContent = styled.div<{ padding: string }>`
   flex: 1;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  padding: ${props => props.padding || '0'};
 `
 
 const ContentArea = styled.main`
